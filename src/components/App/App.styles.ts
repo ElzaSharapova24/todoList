@@ -22,18 +22,36 @@ export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @media (max-width: 768px) {
+        max-width: 400px;
+    }
 `;
 
 export const Wrap = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-`
+    padding-top: 0;
+    padding: 20px;
+    padding-bottom: 0;
+    
+    @media (max-width: 768px) {
+        padding: 10px; 
+        padding-bottom: 0;
+        justify-content: center;
+        flex-direction: column;
+    }
+`;
 
 export const MainTitle = styled.h1`
     font-size: 32px;
     color: #081961;
     text-align: center;
+
+    @media (max-width: 768px) {
+        font-size: 25px;
+    }
 `;
 
 

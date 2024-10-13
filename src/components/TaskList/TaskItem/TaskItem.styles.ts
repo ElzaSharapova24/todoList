@@ -6,7 +6,7 @@ export const TaskItemContainer = styled.div`
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
 
@@ -15,7 +15,13 @@ export const TaskItemContainer = styled.div`
     }
 `;
 
-export const TaskText = styled.span``;
+export const TaskText = styled.span`
+    word-wrap: break-word; 
+    word-break: break-all;
+    overflow-wrap: anywhere; 
+    max-width: 100%; 
+    display: block; 
+`;
 
 export const IconButton = styled.span`
     visibility: hidden;
