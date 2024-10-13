@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AddButton, Drawer, TextField} from "./AddTaskDrawer.styles.ts";
+import {AddButton, CloseButton, Drawer, TextField, TodoListHeader} from "./AddTaskDrawer.styles.ts";
 
 
 interface AddTaskDrawerProps {
@@ -24,8 +24,14 @@ const AddTaskDrawer = ({isOpen, onAddTask, onClose}: AddTaskDrawerProps) => {
 
     const handleAdd = () => {
         if (taskText && !error) {
-            onAddTask(taskText); // Passing new task text
+            onAddTask(taskText);
             setTaskText('');
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && taskText && !error) {
+            handleAdd();
         }
     };
 
@@ -39,17 +45,18 @@ const AddTaskDrawer = ({isOpen, onAddTask, onClose}: AddTaskDrawerProps) => {
 
     return (
         <Drawer>
-            <h2>Add Task</h2>
+            <TodoListHeader>Add Task</TodoListHeader>
             <TextField
                 type="text"
                 value={taskText}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
             />
             {error && <div>{error}</div>}
             <AddButton onClick={handleAdd} disabled={!taskText || !!error}>
                 Add Task
             </AddButton>
-            <button onClick={handleClose}>Close</button>
+            <CloseButton onClick={handleClose}>Close</CloseButton>
         </Drawer>
     );
 };

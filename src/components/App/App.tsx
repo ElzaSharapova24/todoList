@@ -1,4 +1,3 @@
-import './App.css'
 import GlobalStyles from "../../styles/globalStyles.ts";
 import {Task} from "../../models/Task.ts";
 import TaskPresenter from "../../presenters/TaskPresenter.ts";
@@ -7,7 +6,7 @@ import AddTaskDrawer from "../AddTaskDrawer/AddTaskDrawer.tsx";
 import EditTaskPopup from "../EditTaskPopup/EditTaskPopup.tsx";
 import DeleteTaskPopup from "../DeleteTaskPopup/DeleteTaskPopup.tsx";
 import {useMemo, useState} from "react";
-import {Button, Container} from "./App.styles.ts";
+import {Button, Container, ContentWrapper, MainTitle} from "./App.styles.ts";
 
 
 function App() {
@@ -22,20 +21,25 @@ function App() {
         <>
             <GlobalStyles/>
             <Container>
-                <Button onClick={() => setAddTaskDrawerOpen(true)}>Add Task</Button>
-                <TaskList tasks={tasks} onEdit={setEditTask} onDelete={setDeleteTask}/>
-                <AddTaskDrawer isOpen={isAddTaskDrawerOpen} onAddTask={(text) => taskPresenter.addTask(text)}
-                               onClose={() => setAddTaskDrawerOpen(false)}/>
-                <EditTaskPopup
-                    task={editTask}
-                    onSave={(id, text) => taskPresenter.editTask(id, text)}
-                    onClose={() => setEditTask(null)}
-                />
-                <DeleteTaskPopup
-                    task={deleteTask}
-                    onConfirm={(id) => taskPresenter.deleteTask(id)}
-                    onClose={() => setDeleteTask(null)}
-                />
+                <ContentWrapper>
+                    <MainTitle>ToDo List</MainTitle>
+                    {!isAddTaskDrawerOpen && (
+                        <Button onClick={() => setAddTaskDrawerOpen(true)}>Add new task</Button>
+                    )}
+                    <TaskList tasks={tasks} onEdit={setEditTask} onDelete={setDeleteTask}/>
+                    <AddTaskDrawer isOpen={isAddTaskDrawerOpen} onAddTask={(text) => taskPresenter.addTask(text)}
+                                   onClose={() => setAddTaskDrawerOpen(false)}/>
+                    <EditTaskPopup
+                        task={editTask}
+                        onSave={(id, text) => taskPresenter.editTask(id, text)}
+                        onClose={() => setEditTask(null)}
+                    />
+                    <DeleteTaskPopup
+                        task={deleteTask}
+                        onConfirm={(id) => taskPresenter.deleteTask(id)}
+                        onClose={() => setDeleteTask(null)}
+                    />
+                </ContentWrapper>
             </Container>
         </>
     )

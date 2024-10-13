@@ -10,6 +10,11 @@ interface TaskListProps {
 }
 
 const TaskList = ({tasks, onEdit, onDelete}: TaskListProps) => {
+
+    if (tasks.length === 0) {
+        return null;
+    }
+
     return (
         <TaskListContainer>
             {tasks.map(task => (

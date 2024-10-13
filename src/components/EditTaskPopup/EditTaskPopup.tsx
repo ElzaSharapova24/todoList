@@ -22,7 +22,6 @@ const EditTaskPopup = ({task, onSave, onClose}: EditTaskDialogProps) => {
         if (task && taskText) {
             onSave(task.id, taskText);
         }
-        setTaskText('');
         onClose();
     };
 
