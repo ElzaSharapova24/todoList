@@ -1,8 +1,7 @@
-import styled from 'styled-components';
 import TaskItem from "./TaskItem/TaskItem.tsx";
 import {Task} from "../../models/Task.ts";
+import {TaskListContainer} from "./TaskList.styles.ts";
 
-const TaskListContainer = styled.div``;
 
 interface TaskListProps {
     tasks: Task[];
