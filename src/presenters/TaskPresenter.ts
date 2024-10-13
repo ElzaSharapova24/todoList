@@ -2,7 +2,7 @@ import {Task} from '../models/Task';
 
 class TaskPresenter {
     private tasks: Task[] = [];
-    private setTasks: (tasks: Task[]) => void;
+    private readonly setTasks: (tasks: Task[]) => void;
 
     constructor(setTasks: (tasks: Task[]) => void) {
         this.setTasks = setTasks;
@@ -10,7 +10,7 @@ class TaskPresenter {
 
     addTask(text: string) {
         const newTask: Task = {id: Date.now(), text};
-        this.tasks = [...this.tasks, newTask]; // Using spread operator to add new task
+        this.tasks = [...this.tasks, newTask];
         this.setTasks(this.tasks);
     }
 

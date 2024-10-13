@@ -1,6 +1,7 @@
 import {Task} from "../../models/Task.ts";
-import {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Button, ButtonContainer, Dialog, DialogOverlay, TextField} from "./EditTaskPopap.styles.ts";
+import {Heating} from "../../styles/CommonStyles.ts";
 
 
 interface EditTaskDialogProps {
@@ -18,31 +19,40 @@ const EditTaskPopup = ({task, onSave, onClose}: EditTaskDialogProps) => {
         }
     }, [task]);
 
-    const handleSave = () => {
+
+    const handleSave = useCallback(() => {
         if (task && taskText) {
             onSave(task.id, taskText);
         }
         onClose();
-    };
+    }, [task, taskText, onSave, onClose]);
 
-    const handleClose = () => {
+    const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && task && taskText) {
+            handleSave();
+        }
+    }, [task, taskText, handleSave]);
+
+    const handleClose = useCallback(() => {
         setTaskText('');
         onClose();
-    };
+    }, [onClose]);
+
     if (!task) return null;
 
     return (
         <DialogOverlay>
             <Dialog>
-                <h2>Edit Task</h2>
+                <Heating>Редактировать задачу</Heating>
                 <TextField
                     type="text"
                     value={taskText}
                     onChange={(e) => setTaskText(e.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
                 <ButtonContainer>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleSave}>Save</Button>
+                    <Button onClick={handleClose}>Отменить</Button>
+                    <Button onClick={handleSave}>Сохранить</Button>
                 </ButtonContainer>
             </Dialog>
         </DialogOverlay>

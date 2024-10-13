@@ -6,10 +6,10 @@ import AddTaskDrawer from "../AddTaskDrawer/AddTaskDrawer.tsx";
 import EditTaskPopup from "../EditTaskPopup/EditTaskPopup.tsx";
 import DeleteTaskPopup from "../DeleteTaskPopup/DeleteTaskPopup.tsx";
 import {useMemo, useState} from "react";
-import {Button, Container, ContentWrapper, MainTitle} from "./App.styles.ts";
+import {Button, Container, ContentWrapper, MainTitle, Wrap} from "./App.styles.ts";
 
 
-function App() {
+const App = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isAddTaskDrawerOpen, setAddTaskDrawerOpen] = useState(false);
     const [editTask, setEditTask] = useState<Task | null>(null);
@@ -22,10 +22,12 @@ function App() {
             <GlobalStyles/>
             <Container>
                 <ContentWrapper>
-                    <MainTitle>ToDo List</MainTitle>
-                    {!isAddTaskDrawerOpen && (
-                        <Button onClick={() => setAddTaskDrawerOpen(true)}>Add new task</Button>
-                    )}
+                    <Wrap>
+                        <MainTitle>Список задач</MainTitle>
+                        {!isAddTaskDrawerOpen && (
+                            <Button onClick={() => setAddTaskDrawerOpen(true)}>Добавить новую задачу</Button>
+                        )}
+                    </Wrap>
                     <TaskList tasks={tasks} onEdit={setEditTask} onDelete={setDeleteTask}/>
                     <AddTaskDrawer isOpen={isAddTaskDrawerOpen} onAddTask={(text) => taskPresenter.addTask(text)}
                                    onClose={() => setAddTaskDrawerOpen(false)}/>

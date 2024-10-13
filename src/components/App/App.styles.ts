@@ -6,11 +6,7 @@ export const Container = styled.section`
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #f0f4f8;
     color: #333;
-
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-
     max-width: 1200px;
     margin: 0 auto;
 `;
@@ -21,12 +17,18 @@ export const ContentWrapper = styled.div`
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
     padding: 15px;
+    padding-bottom: 20px;
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 20px;
 `;
+
+export const Wrap = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
 
 export const MainTitle = styled.h1`
     font-size: 32px;

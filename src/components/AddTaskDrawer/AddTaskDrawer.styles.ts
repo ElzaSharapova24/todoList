@@ -20,29 +20,32 @@ export const TodoListHeader = styled.h2`
   text-align: center;
 `;
 
-export const TextField = styled.input`
+export const TextField = styled.input<{ error?: boolean }>`
     margin-bottom: 16px;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid ${({ error }) => (error ? 'red' : '#ccc')};
+    border-radius: 5px;
+    transition: border 0.3s ease-in-out;
+
+    &:hover {
+        border: 1px solid #096885;
+    }
+    
 `;
 
 export const AddButton = styled.button`
     padding: 8px;
-    background-color: blue;
+    background-color: #3838b8;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 15px;
-    transition: transform 0.5s ease-in-out;
 
     &:disabled {
         background-color: grey;
     }
     
-    &:hover {
-        transform: scale(1.1);
-    }
 `;
 
 export const CloseButton = styled.button`
@@ -52,9 +55,12 @@ export const CloseButton = styled.button`
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    transition: transform 0.5s ease-in-out;
 
-    &:hover {
-        transform: scale(1.1);
-    }
+`;
+
+export const ErrorMessage = styled.p`
+    color: red;
+    margin-top: -12px; 
+    margin-bottom: 5px; 
+    font-size: 14px;
 `;

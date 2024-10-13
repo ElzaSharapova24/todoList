@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-import {AddButton, CloseButton, Drawer, TextField, TodoListHeader} from "./AddTaskDrawer.styles.ts";
-
+import {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
+import {AddButton, CloseButton, Drawer, ErrorMessage, TextField, TodoListHeader} from './AddTaskDrawer.styles';
 
 interface AddTaskDrawerProps {
     isOpen: boolean;
@@ -8,57 +7,64 @@ interface AddTaskDrawerProps {
     onClose: () => void;
 }
 
-const AddTaskDrawer = ({isOpen, onAddTask, onClose}: AddTaskDrawerProps) => {
-    const [taskText, setTaskText] = useState('');
-    const [error, setError] = useState('');
+type Error = '' | 'Поле не может быть пустым' | 'Задача не может содержать "!"';
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const text = e.target.value;
-        if (text.includes('!')) {
-            setError('Task text cannot contain "!"');
-        } else {
-            setError('');
-        }
-        setTaskText(text);
+const AddTaskDrawer = ({isOpen, onAddTask, onClose}: AddTaskDrawerProps) => {
+    const [taskText, setTaskText] = useState<string>('');
+    const [error, setError] = useState<Error>('');
+
+    const validateText = (text: string): Error => {
+        if (text.includes('!')) return 'Задача не может содержать "!"';
+        if (!text.trim()) return 'Поле не может быть пустым';
+        return '';
     };
 
-    const handleAdd = () => {
-        if (taskText && !error) {
+    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        const text = e.target.value.trim();
+        setError(validateText(text));
+        setTaskText(text);
+    }, []);
+
+    const handleAdd = useCallback(() => {
+        if (!error) {
             onAddTask(taskText);
             setTaskText('');
+            onClose();
         }
-    };
+    }, [error, taskText, onAddTask]);
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && taskText && !error) {
+    const handleKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && !error) {
             handleAdd();
         }
-    };
+    }, [handleAdd, error]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setTaskText('');
         setError('');
         onClose();
-    };
+    }, [onClose]);
 
     if (!isOpen) return null;
 
     return (
         <Drawer>
-            <TodoListHeader>Add Task</TodoListHeader>
+            <TodoListHeader>Добавить задачу</TodoListHeader>
             <TextField
                 type="text"
                 value={taskText}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
+                error={!!error}
             />
-            {error && <div>{error}</div>}
-            <AddButton onClick={handleAdd} disabled={!taskText || !!error}>
-                Add Task
+            {error && <ErrorMessage>{error}</ErrorMessage>}
+            <AddButton onClick={handleAdd} disabled={!!error}>
+                Добавить
             </AddButton>
-            <CloseButton onClick={handleClose}>Close</CloseButton>
+            <CloseButton onClick={handleClose}>Отменить</CloseButton>
         </Drawer>
     );
 };
+
 
 export default AddTaskDrawer;

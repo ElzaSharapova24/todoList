@@ -1,5 +1,7 @@
 import {Task} from "../../models/Task.ts";
-import {Button, ButtonContainer, Dialog, DialogOverlay} from "./DeleteTaskPopup.styles.ts";
+import {Button, ButtonContainer, DeleteDescription, Dialog, DialogOverlay} from "./DeleteTaskPopup.styles.ts";
+import {Heating} from "../../styles/CommonStyles.ts";
+import {useCallback} from "react";
 
 
 interface DeleteTaskDialogProps {
@@ -9,23 +11,25 @@ interface DeleteTaskDialogProps {
 }
 
 const DeleteTaskPopup = ({task, onConfirm, onClose}: DeleteTaskDialogProps) => {
-    const handleConfirm = () => {
+    const handleConfirm = useCallback(() => {
         if (task) {
             onConfirm(task.id);
         }
         onClose();
-    };
+    }, [task, onConfirm, onClose]);
+
+    if (!task) return null
 
     if (!task) return null;
 
     return (
         <DialogOverlay>
             <Dialog>
-                <h2>Confirm Deletion</h2>
-                <p>Are you sure you want to delete the task "{task.text}"?</p>
+                <Heating>Подтвердите удаление</Heating>
+                <DeleteDescription>Вы уверены что хотите удалить задачу "{task.text}"?</DeleteDescription>
                 <ButtonContainer>
-                    <Button onClick={onClose}>Cancel</Button>
-                    <Button onClick={handleConfirm}>Delete</Button>
+                    <Button onClick={onClose}>Отменить</Button>
+                    <Button onClick={handleConfirm}>Удалить</Button>
                 </ButtonContainer>
             </Dialog>
         </DialogOverlay>

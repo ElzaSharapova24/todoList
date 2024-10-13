@@ -42,3 +42,8 @@ export const Button = styled.button`
         color: white;
     }
 `;
+
+export const DeleteDescription = styled.h1`
+    font-size: 15px;
+    color: #615f5f;
+`;
