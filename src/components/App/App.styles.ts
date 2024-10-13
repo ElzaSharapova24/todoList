@@ -44,10 +44,11 @@ export const Button = styled.button`
     color: white;
     border: none;
     cursor: pointer;
-    transition: transform 0.5s ease-in-out;
+    transition: outline 0.3s ease-in-out;
 
     &:hover {
-        transform: scale(1.1); 
+        outline-offset: 2px;
+        outline: 1px solid #096885;
     }
 `;
 
