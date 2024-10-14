@@ -1,50 +1,64 @@
-# React + TypeScript + Vite
+# ToDo List на React и TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это простое приложение "Список задач", созданное с использованием React и TypeScript. Приложение позволяет пользователям добавлять, редактировать и удалять задачи с удобным интерфейсом.
 
-Currently, two official plugins are available:
+## Функциональность
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Добавление новых задач
+- Валидация ввода 
+- Редактирование задач
+- Удаление задач
+- Адаптивный дизайн
 
-## Expanding the ESLint configuration
+## Технологический стек
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React** — библиотека для создания пользовательских интерфейсов.
+- **TypeScript** — язык программирования, добавляющий статическую типизацию в JavaScript.
+- **Styled Components** — библиотека для стилизации компонентов React с использованием CSS-in-JS.
 
-- Configure the top-level `parserOptions` property like this:
+## Установка
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. **Клонируйте репозиторий:**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+    ```bash
+    git clone https://git@github.com:ElzaSharapova24/todoList.git
+    ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+2. **Перейдите в директорию проекта:**
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+    ```bash
+    cd todoList
+    ```
+
+3. **Установите зависимости:**
+
+    ```bash
+    npm install
+    ```
+
+4. **Запустите проект локально:**
+
+    ```bash
+    npm start
+    ```
+
+   Приложение будет доступно по адресу `http://localhost:3000`.
+
+## Использование
+
+1. Откройте приложение и введите задачу в текстовое поле.
+2. Нажмите "Добавить" или нажмите "Enter", чтобы добавить задачу в список.
+3. Чтобы отредактировать задачу, щелкните по тексту задачи и измените его.
+4. Для удаления задачи нажмите на иконку "Удалить" рядом с задачей.
+
+## Валидация
+
+- Приложение не позволяет добавлять задачи, содержащие символ `!`, и выводит соответствующее сообщение об ошибке.
+- Поле ввода не может быть пустым при добавлении задачи.
+
+## Адаптивность
+
+Приложение поддерживает мобильные устройства:
+- Размер шрифта заголовков уменьшается на малых экранах.
+- Отступы контейнеров изменяются для лучшего отображения на мобильных устройствах.
+
