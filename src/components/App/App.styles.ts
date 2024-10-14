@@ -32,9 +32,7 @@ export const Wrap = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 0;
-    padding: 20px;
-    padding-bottom: 0;
+    padding: 0 20px 0 20px;
     
     @media (max-width: 768px) {
         padding: 10px; 
